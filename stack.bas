@@ -47,6 +47,7 @@ Function POP_NODE% (stk As Stack)
     value = topNode.value
 
     stk.topPtr = topNode.nextAddr
+    _MemFree m
 
     stk.length = stk.length - 1
 
