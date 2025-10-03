@@ -1,12 +1,3 @@
-Type Node
-    value As Integer
-    nextAddr As _Offset
-End Type
-
-Dim Shared NODE_SIZE As Integer
-Dim n1 As Node
-NODE_SIZE = Len(n1)
-
 Type Queue
     frontPtr As _Offset
     rearPtr As _Offset
@@ -15,7 +6,7 @@ End Type
 
 
 ' add node to end of queue
-Sub ENQUEUE_NODE (q As Queue, value As Integer)
+Sub ENQUEUE_QUEUE (q As Queue, value As Integer)
     Dim node As Node
     node.value = value
 
@@ -49,7 +40,7 @@ End Sub
 
 
 ' add node to front of queue
-Sub DEQUEUE_NODE (q As Queue)
+Sub DEQUEUE_QUEUE (q As Queue)
     If q.length = 0 Then
         Print "Queue is empty!"
         End
@@ -73,7 +64,7 @@ End Sub
 
 
 ' get value of node at front of queue
-Function PEEK_NODE% (q As Queue)
+Function PEEK_QUEUE% (q As Queue)
     If q.length = 0 Then
         Print "Queue is empty!"
         End
@@ -89,9 +80,9 @@ Function PEEK_NODE% (q As Queue)
 End Function
 
 ' return string representation of queue
-Function TO_STR$ (q As Queue)
+Function QUEUE_TO_STR$ (q As Queue)
     If q.length = 0 Then
-        TO_STR$ = "{ }"
+        QUEUE_TO_STR$ = "{ }"
         Exit Function
     End If
 
@@ -113,6 +104,6 @@ Function TO_STR$ (q As Queue)
 
     repr = repr + Str$(current.value) + " }"
 
-    TO_STR$ = repr
+    QUEUE_TO_STR$ = repr
 End Function
 

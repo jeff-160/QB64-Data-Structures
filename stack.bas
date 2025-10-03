@@ -1,12 +1,3 @@
-Type Node
-    value As Integer
-    nextAddr As _Offset
-End Type
-
-Dim Shared NODE_SIZE As Integer
-Dim n1 As Node
-NODE_SIZE = Len(n1)
-
 Type Stack
     topPtr As _Offset
     length As Integer
@@ -14,7 +5,7 @@ End Type
 
 
 ' add node to end of stack
-Sub PUSH_NODE (stk As Stack, value As Integer)
+Sub PUSH_STACK (stk As Stack, value As Integer)
     Dim node As Node
     node.value = value
     node.nextAddr = stk.topPtr
@@ -31,7 +22,7 @@ End Sub
 
 
 ' remove and return value of node from top of stack
-Function POP_NODE% (stk As Stack)
+Function POP_STACK% (stk As Stack)
     If stk.length = 0 Then
         Print "Stack is empty!"
         End
@@ -51,12 +42,12 @@ Function POP_NODE% (stk As Stack)
 
     stk.length = stk.length - 1
 
-    POP_NODE% = value
+    POP_STACK% = value
 End Function
 
 
 ' get value of node at top of stack
-Function PEEK_NODE% (stk As Stack)
+Function PEEK_STACK% (stk As Stack)
     If stk.length = 0 Then
         Print "Stack is empty!"
         End
@@ -68,14 +59,14 @@ Function PEEK_NODE% (stk As Stack)
     Dim node As Node
     _MemGet m, m.OFFSET, node
 
-    PEEK_NODE% = node.value
+    PEEK_STACK% = node.value
 End Function
 
 
 ' return string representation of stack
-Function TO_STR$ (stk As Stack)
+Function STACK_TO_STR$ (stk As Stack)
     If stk.topPtr = 0 Then
-        TO_STR$ = "{ }"
+        STACK_TO_STR$ = "{ }"
         Exit Function
     End If
 
@@ -97,5 +88,5 @@ Function TO_STR$ (stk As Stack)
 
     repr = "{ " + repr + Str$(current.value) + " }"
 
-    TO_STR$ = repr
+    STACK_TO_STR$ = repr
 End Function

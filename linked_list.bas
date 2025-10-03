@@ -1,12 +1,3 @@
-Type Node
-    value As Integer
-    nextAddr As _Offset
-End Type
-
-Dim Shared NODE_SIZE As Integer
-Dim n1 As Node
-NODE_SIZE = Len(n1)
-
 Type LinkedList
     headPtr As _Offset
     tailPtr As _Offset
@@ -15,7 +6,7 @@ End Type
 
 
 ' add node to end of linked list
-Sub APPEND_NODE (lis As LinkedList, value As Integer)
+Sub APPEND_LL (lis As LinkedList, value As Integer)
     Dim node As Node
     node.value = value
 
@@ -59,7 +50,7 @@ End Sub
 
 
 ' add node to front of linked list
-Sub PREPEND_NODE (lis As LinkedList, value As Integer)
+Sub PREPEND_LL (lis As LinkedList, value As Integer)
     Dim node As Node
     node.value = value
     node.nextAddr = lis.headPtr
@@ -75,7 +66,7 @@ End Sub
 
 
 ' remove node at index
-Sub REMOVE_NODE (lis As LinkedList, index As Integer)
+Sub REMOVE_LL (lis As LinkedList, index As Integer)
     If lis.length = 0 Then
         Print "Linked list is empty!"
         End
@@ -142,7 +133,7 @@ End Sub
 
 
 ' get value of node at index
-Function GET_NODE% (lis As LinkedList, index As Integer)
+Function GET_LL% (lis As LinkedList, index As Integer)
     If index < 0 Or index >= lis.length Then
         Print "Index out of bounds!"
         End
@@ -158,13 +149,13 @@ Function GET_NODE% (lis As LinkedList, index As Integer)
         _MemGet m, m.OFFSET, current
     Next i
 
-    GET_NODE% = current.value
+    GET_LL% = current.value
 End Function
 
 ' return string representation of linked list
-Function TO_STR$ (lis As LinkedList)
+Function LL_TO_STR$ (lis As LinkedList)
     If lis.length = 0 Then
-        TO_STR$ = "{ }"
+        LL_TO_STR$ = "{ }"
         Exit Function
     End If
 
@@ -186,5 +177,5 @@ Function TO_STR$ (lis As LinkedList)
 
     repr = repr + Str$(current.value) + " }"
 
-    TO_STR$ = repr
+    LL_TO_STR$ = repr
 End Function
