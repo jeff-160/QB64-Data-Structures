@@ -11,20 +11,20 @@ The code is bad because the language is bad.
 ## Features
 
 `LinkedList`
-- `APPEND_NODE`
-- `PREPEND_NODE`
-- `REMOVE_NODE`
-- `GET_NODE`
-- `TO_STR`
+- `APPEND_LL`
+- `PREPEND_LL`
+- `REMOVE_LL`
+- `GET_LL`
+- `LL_TO_STR`
 
 `Stack`
-- `PUSH_NODE`
-- `POP_NODE`
-- `PEEK_NODE`
-- `TO_STR`
+- `PUSH_STACK`
+- `POP_STACK`
+- `PEEK_STACK`
+- `STACK_TO_STR`
 
 `Queue`
-- `ENQUEUE_NODE`
-- `DEQUEUE_NODE`
-- `PEEK_NODE`
-- `TO_STR`
+- `ENQUEUE_QUEUE`
+- `DEQUEUE_QUEUE`
+- `PEEK_QUEUE`
+- `QUEUE_TO_STR`
