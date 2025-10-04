@@ -49,6 +49,64 @@ Sub APPEND_LL (lis As LinkedList, value As Integer)
 End Sub
 
 
+' insert node into linked list at index
+Sub INSERT_LL (lis As LinkedList, index As Integer, value As Integer)
+    Dim node As Node
+    node.value = value
+
+    If index < 0 Or index > lis.length Then
+        Print "Index out of bounds!"
+        End
+    ElseIf lis.length = 0 Or index = lis.length Then
+        APPEND_LL lis, value
+        Exit Sub
+    End If
+
+    ' store new node in memory
+    Dim nodeBlock As _MEM
+    nodeBlock = _MemNew(NODE_SIZE)
+    _MemPut nodeBlock, nodeBlock.OFFSET, node
+
+    Dim m As _MEM
+    m = _Mem(lis.headPtr, NODE_SIZE)
+
+    ' keep track of stuff
+    Dim previous As Node
+    Dim current As Node
+    Dim addr As _Offset
+
+    _MemGet m, m.OFFSET, previous
+    addr = m.OFFSET
+
+    m = _Mem(previous.nextAddr, NODE_SIZE)
+    _MemGet m, m.OFFSET, current
+
+    ' traverse to index
+    For i = 1 To index - 1
+        previous = current
+
+        addr = m.OFFSET
+
+        m = _Mem(current.nextAddr, NODE_SIZE)
+        _MemGet m, m.OFFSET, current
+    Next i
+
+    ' link nodes
+    previous.nextAddr = nodeBlock.OFFSET
+    node.nextAddr = m.OFFSET
+
+    ' update new node in memory
+    m = _Mem(nodeBlock.OFFSET, NODE_SIZE)
+    _MemPut m, m.OFFSET, node
+
+    ' update previous node in memory
+    m = _Mem(addr, NODE_SIZE)
+    _MemPut m, m.OFFSET, previous
+
+    lis.length = lis.length + 1
+End Sub
+
+
 ' add node to front of linked list
 Sub PREPEND_LL (lis As LinkedList, value As Integer)
     Dim node As Node
