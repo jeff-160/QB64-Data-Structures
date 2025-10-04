@@ -58,7 +58,7 @@ Sub INSERT_LL (lis As LinkedList, index As Integer, value As Integer)
     If index < 0 Or index > lis.length Then
         Print "Index out of bounds!"
         End
-    elseif index = 0 then
+    ElseIf index = 0 THEN
         PREPEND_LL lis, value
         EXIT SUB
     ElseIf lis.length = 0 Or index = lis.length Then
