@@ -13,6 +13,7 @@ The code is bad because the language is bad.
 `LinkedList`
 - `APPEND_LL`
 - `PREPEND_LL`
+- `INSERT_LL`
 - `REMOVE_LL`
 - `GET_LL`
 - `LL_TO_STR`
