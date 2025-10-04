@@ -1,6 +1,5 @@
 Type LinkedList
     headPtr As _Offset
-    tailPtr As _Offset
     length As Integer
 End Type
 
@@ -18,32 +17,34 @@ Sub APPEND_LL (lis As LinkedList, value As Integer)
     ' if linked list is empty
     If lis.length = 0 Then
         lis.headPtr = nodeBlock.OFFSET
-        lis.tailPtr = lis.headPtr
 
         lis.length = 1
         Exit Sub
     End If
 
-    Dim current As Node
     Dim m As _MEM
     m = _Mem(lis.headPtr, NODE_SIZE)
+
+    Dim current As Node
+    Dim addr As _Offset
+
     _MemGet m, m.OFFSET, current
+    addr = m.OFFSET
 
     While current.nextAddr <> 0
         m = _Mem(current.nextAddr, NODE_SIZE)
-
         _MemGet m, m.OFFSET, current
+
+        addr = m.OFFSET
     Wend
 
     current.nextAddr = nodeBlock.OFFSET
 
     ' update last node in memory
     Dim lastBlock As _MEM
-    lastBlock = _Mem(lis.tailPtr, NODE_SIZE)
+    lastBlock = _Mem(addr, NODE_SIZE)
 
     _MemPut lastBlock, lastBlock.OFFSET, current
-
-    lis.tailPtr = current.nextAddr
 
     lis.length = lis.length + 1
 End Sub
@@ -145,10 +146,6 @@ Sub REMOVE_LL (lis As LinkedList, index As Integer)
 
         _MemFree m
 
-        If lis.headPtr = 0 Then
-            lis.tailPtr = 0
-        End If
-
         lis.length = lis.length - 1
         Exit Sub
     End If
@@ -180,11 +177,6 @@ Sub REMOVE_LL (lis As LinkedList, index As Integer)
 
     _MemPut previousBlock, previousBlock.OFFSET, previous
     _MemFree m
-
-    ' update tail pointer if last node is removed
-    If index = length - 1 Then
-        lis.tailPtr = addr
-    End If
 
     lis.length = lis.length - 1
 End Sub
@@ -237,3 +229,4 @@ Function LL_TO_STR$ (lis As LinkedList)
 
     LL_TO_STR$ = repr
 End Function
+
